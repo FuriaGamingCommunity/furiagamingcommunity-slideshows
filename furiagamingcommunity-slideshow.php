@@ -4,7 +4,7 @@
  * Plugin URI: http://furiaguild.com
  * Description: Sets a new post type named slides and adds a custom widget to display them into slideshows.
  * Author: Xavier Giménez Segovia
- * Version: 1.1
+ * Version: 1.1.2
  * Author URI: https://es.linkedin.com/pub/javier-gimenez-segovia/
  * Text Domain: furiagamingcommunity_slideshow
 **/
@@ -16,17 +16,18 @@ defined( 'ABSPATH' ) or die( __( 'No script kiddies please!', 'furiagamingcommun
  * Slides are used with the taxonomy "Slideshow" to display images for Flexslider.
  *
  * @author Xavier Giménez Segovia
- * @version 1.1.0
+ * @version 1.2.0
  */
 class FuriaGamingCommunity_Slides {
 
-	// Register slide dimensions
-	public $height 	= 450;
-	public $width 	= 900;
+	/**
+     * Holds the values to be used in the fields callbacks
+     */
+	private $options;
 
 	/**
 	 * Register the custom post and taxonomy with WordPress on init
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function __construct() {
 
@@ -37,8 +38,12 @@ class FuriaGamingCommunity_Slides {
 
 		// Admin-only methods
 		if ( is_admin() ) {
+
+			// Settings actions
+			add_action( 'admin_menu', array( $this, 'add_plugin_page' ) );
+       		add_action( 'admin_init', array( $this, 'page_init' ) );
 			
-			// Admin Actions
+			// Admin actions
 			add_action( 'do_meta_boxes'				, array( $this , 'slide_image_box' 			) );	
 			add_action( 'admin_menu'				, array( $this , 'change_slide_link' 		) );
 			add_action( 'save_post'					, array( $this , 'save_meta' 				) );
@@ -46,7 +51,7 @@ class FuriaGamingCommunity_Slides {
 			add_action( 'edit_attachment'			, array( $this , 'save_meta' 				) );
 			add_action( 'manage_posts_custom_column', array( $this , 'slides_custom_columns'	) );
 			
-			// Admin Filters
+			// Admin filters
 			add_filter( 'post_updated_messages'		, array( $this , 'slide_updated_messages' 	) );
 			add_filter( 'manage_edit-slide_columns'	, array( $this , 'slides_edit_columns'		) );
 		}
@@ -54,12 +59,17 @@ class FuriaGamingCommunity_Slides {
 	
 	/**
 	 * Add a featured image size for the slides
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function register_slide_size() {
 		
+		if ( !isset($this->options['width']) )
+			$this->options['width'] = 1950;
+		if ( !isset($this->options['height']) )
+			$this->options['height'] = 1080;
+
 		// Register the image size
-		add_image_size( 'featured-slide' , $this->width , $this->height , true );
+		add_image_size( 'featured-slide' , $this->options['width'] , $this->options['height'] , true );
 	}
 
 	/**
@@ -123,7 +133,7 @@ class FuriaGamingCommunity_Slides {
 
 	/**
 	 * Register a custom post taxonomy for Slideshows
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function register_slideshows() {
 		
@@ -141,14 +151,14 @@ class FuriaGamingCommunity_Slides {
 			'separate_items_with_commas'	=> __('Separate slideshows with commas', 'furiagamingcommunity_slideshow'),
 			'choose_from_most_used'			=> __('Choose from the most used slideshows', 'furiagamingcommunity_slideshow'),
 			);
-		
+
 		$slideshow_tax_caps = array(
 			'manage_terms'	=> 'manage_categories',
 			'edit_terms'	=> 'manage_categories',
 			'delete_terms'	=> 'manage_categories',
 			'assign_terms'	=> 'edit_posts'
 			);
-		
+
 		$slideshow_tax_args = array(
 			'labels'				=> $slideshow_tax_labels,
 			'public'				=> true,
@@ -160,13 +170,13 @@ class FuriaGamingCommunity_Slides {
 			'capabilities'    	  	=> $slideshow_tax_caps,
 			);
 
-		// Register the Slideshow post taxonomy! 
+		// Register the Slideshow post taxonomy
 		register_taxonomy( 'slideshow', 'slide', $slideshow_tax_args );	
 	}
-	
+
 	/**
 	 * Place the "featured image" box in the main listing, since it's the key element here.
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function slide_image_box() {	
 		$slide_image_title = __('Set featured slide image', 'furiagamingcommunity_slideshow') . '(' . $this->width . 'x' . $this->height . ')';
@@ -176,7 +186,7 @@ class FuriaGamingCommunity_Slides {
 	
 	/**
 	 * Get rid of the "slug" box, show our permalink box instead.
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function change_slide_link() {
 		remove_meta_box( 'slugdiv', 'slide', 'core' );
@@ -185,7 +195,7 @@ class FuriaGamingCommunity_Slides {
 	
 	/**
 	 * Display inputs for our custom slide meta fields
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function settings_box( $object , $box ) {
 		wp_nonce_field( basename( __FILE__ ), 'slideshow-settings-box' );
@@ -237,12 +247,11 @@ class FuriaGamingCommunity_Slides {
 			elseif ( current_user_can( 'edit_post_meta', $post_id, $meta_key ) && $new_meta_value && $new_meta_value != $meta_value )
 				update_post_meta( $post_id, $meta_key, $new_meta_value );
 		}
-	}
-	
+	}	
 	
 	/**
 	 * Customize backend messages when a slide is updated
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function slide_updated_messages( $slide_messages ) {
 		global $post, $post_ID;
@@ -266,7 +275,7 @@ class FuriaGamingCommunity_Slides {
 	
 	/**
 	 * Adds the slide featured image and link to the slides page
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function slides_edit_columns( $columns ) {
 		$columns = array(		
@@ -282,28 +291,148 @@ class FuriaGamingCommunity_Slides {
 	
 	/**
 	 * Adds content to the custom column format
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function slides_custom_columns( $columns ) {
 		global $post;
 		switch ( $columns ) {
 			case 'slide' :
-				echo get_the_post_thumbnail( $post->ID , 'medium');
+			echo get_the_post_thumbnail( $post->ID , 'medium');
 			break;
 			
 			case 'show' :
-				echo get_the_term_list( $post->ID , 'slideshow' );
+			echo get_the_term_list( $post->ID , 'slideshow' );
 			break;
 			
 			case 'slide-link' :	
-				if ( get_post_meta($post->ID, "Permalink", $single = true) != "" ) {
-					echo "<a href='" . get_post_meta($post->ID, "Permalink", $single = true) . "'>" . get_post_meta($post->ID, "Permalink", $single = true) . "</a>";
-				} else {
-					_e('No Link', 'furiagamingcommunity_slideshow');
-				}	
+			if ( get_post_meta($post->ID, "Permalink", $single = true) != "" ) {
+				echo "<a href='" . get_post_meta($post->ID, "Permalink", $single = true) . "'>" . get_post_meta($post->ID, "Permalink", $single = true) . "</a>";
+			} else {
+				_e('No Link', 'furiagamingcommunity_slideshow');
+			}	
 			break;
 		}
 	}
+
+	/**
+	 * Add options page
+	 * @since 1.1.0
+	 */
+	public function add_plugin_page() {
+		// This page will be under "Settings"
+		add_options_page(
+			__('Slides Settings', 'furiagamingcommunity_slideshow'), 
+			__('Slides', 'furiagamingcommunity_slideshow'), 
+			'manage_options', 
+			'slides-admin', 
+			array( $this, 'create_admin_page' )
+			);
+	}
+
+	/**
+	 * Options page callback
+	 * @since 1.1.0
+	 */
+	public function create_admin_page() {
+		// Set class property
+		$this->options = get_option( 'slides_option' );
+		?>
+		<div class="wrap">
+			<h2><?php _e('Slides Settings', 'furiagamingcommunity_slideshow'); ?></h2>
+			<p><?php _e('Set the defaults for each slide and slideshow you create. Please bear in mind that this settings would be overwritten if you customize any slideshow widget parameters individually.', 'furiagamingcommunity_slideshow'); ?></p>         
+			<form method="post" action="options.php">
+				<?php
+					// This prints out all hidden setting fields
+				settings_fields( 'slides_group' );   
+				do_settings_sections( 'slides-admin' );
+				submit_button(); 
+				?>
+			</form>
+		</div>
+		<?php
+	}
+
+	/**
+	 * Register and add settings
+	 * @since 1.1.0
+	 */
+	public function page_init() {        
+		register_setting(
+			'slides_group', // Option group
+			'slides_option', // Option name
+			array( $this, 'sanitize' ) // Sanitize
+			);
+
+		add_settings_section(
+			'slides_section_size', // ID
+			__('Size Settings', 'furiagamingcommunity_slideshow'), // Title
+			array( $this, 'print_section_info' ), // Callback
+			'slides-admin' // Page
+			);  
+
+		add_settings_field(
+			'width', // ID
+			__('Width', 'furiagamingcommunity_slideshow'), // Title 
+			array( $this, 'width_callback' ), // Callback
+			'slides-admin', // Page
+			'slides_section_size' // Section           
+			);      
+
+		add_settings_field(
+			'height', 
+			__('Height', 'furiagamingcommunity_slideshow'), // Title 
+			array( $this, 'height_callback' ), 
+			'slides-admin', 
+			'slides_section_size'
+			);      
+	}
+
+	/**
+	 * Sanitize each setting field as needed
+	 * @since 1.1.0
+	 * @param array $input Contains all settings fields as array keys
+	 */
+	public function sanitize( $input ) {
+		$new_input = array();
+		if( isset( $input['width'] ) )
+			$new_input['width'] = absint( $input['width'] );
+
+		if( isset( $input['height'] ) )
+			$new_input['height'] = absint( $input['height'] );
+
+		return $new_input;
+	}
+
+	/** 
+	 * Print the Section text
+	 * @since 1.1.0
+	 */
+	public function print_section_info() {
+		_e('Set the default size for each slide');
+	}
+
+	/** 
+	 * Get the settings option array and print one of its values
+	 * @since 1.1.0
+	 */
+	public function width_callback() {
+		printf(
+			'<input type="number" id="width" name="slides_option[width]" value="%s" />',
+			isset( $this->options['width'] ) ? esc_attr( $this->options['width']) : ''
+			);
+	}
+
+	/** 
+	 * Get the settings option array and print one of its values
+	 * @since 1.1.0
+	 */
+	public function height_callback() {
+		printf(
+			'<input type="number" id="height" name="slides_option[height]" value="%s" />',
+			isset( $this->options['height'] ) ? esc_attr( $this->options['height']) : ''
+			);
+	}
+
 } // class FuriaGamingCommunity_Slides
 register_activation_hook( basename( __FILE__ ), new FuriaGamingCommunity_Slides );
 
@@ -335,10 +464,10 @@ class FuriaGamingCommunity_Slideshow extends WP_Widget {
 	public function init(){
 		
 		// Add notices.
-    	add_action( 'admin_notices', array( &$this, 'notices' ) );
+		add_action( 'admin_notices', array( &$this, 'notices' ) );
 
-    	if ( is_wp_error( $this->error ) )
-    		$this->notices( $this->error->get_error_message(), 'warning is-dismissible' );
+		if ( is_wp_error( $this->error ) )
+			$this->notices( $this->error->get_error_message(), 'warning is-dismissible' );
 	}
 
 	/**
@@ -384,58 +513,58 @@ class FuriaGamingCommunity_Slideshow extends WP_Widget {
 				) );
 		
 			// Check for slides.
-			if ( $slide_loop->have_posts() ) : 
+		if ( $slide_loop->have_posts() ) : 
 
-				$slides = array();
-				$total_slides = $slide_loop->found_posts;
+			$slides = array();
+			$total_slides = $slide_loop->found_posts;
 
-				// The Loop.
-				while ( $slide_loop->have_posts() ) : $slide_loop->the_post();
+			// The Loop.
+			while ( $slide_loop->have_posts() ) : $slide_loop->the_post();
 
-					$slides[] = array(
-						'number'		=> $slide_count,
-						'title' 		=> $post->post_title,
-						'tab'			=> get_post_meta( $post->ID , 'TabTitle' , $single = true ),
-						'link'			=> get_post_meta( $post->ID , 'Permalink' , $single = true ),
-						'content'		=> $post->post_content,
-						'image'			=> get_the_post_thumbnail( $post->ID, 'featured-slide' )
+				$slides[] = array(
+					'number'		=> $slide_count,
+					'title' 		=> $post->post_title,
+					'tab'			=> get_post_meta( $post->ID , 'TabTitle' , $single = true ),
+					'link'			=> get_post_meta( $post->ID , 'Permalink' , $single = true ),
+					'content'		=> $post->post_content,
+					'image'			=> get_the_post_thumbnail( $post->ID, 'featured-slide' )
 					);
 
-					$slide_count++;
+				$slide_count++;
 
 				// End the loop.
-				endwhile; 
+			endwhile; 
 
-				?>
-				<div id="<?php echo $slideshow . '-slider'; ?>" class="flexslider">
+			?>
+			<div id="<?php echo $slideshow . '-slider'; ?>" class="flexslider">
 
-					<ul class="slides">
+				<ul class="slides">
 
-						<?php for($i = 0; $i < $total_slides; $i++) : ?>
+					<?php for($i = 0; $i < $total_slides; $i++) : ?>
 
-						<li class="slideshow-slide">
-							<?php echo $slides[$i]['image']; ?>
-						</li>
+					<li class="slideshow-slide">
+						<?php echo $slides[$i]['image']; ?>
+					</li>
 
-						<?php endfor; ?>
+					<?php endfor; ?>
 
-					</ul>		
-				</div><!-- .flexslider -->
-				<?php
+				</ul>		
+			</div><!-- .flexslider -->
+			<?php
 
-			else: 
-				// No posts.
-			endif;
-
-			// Reset post data.
-			wp_reset_postdata();
-
-		else:
-			// No slideshow.
+		else: 
+			// No posts.
 		endif;
 
-		echo $after_widget;
-	}
+		// Reset post data.
+		wp_reset_postdata();
+
+	else:
+		// No slideshow.
+	endif;
+
+	echo $after_widget;
+}
 
 	/**
 	 * Back-end widget form.
@@ -453,20 +582,19 @@ class FuriaGamingCommunity_Slideshow extends WP_Widget {
 			<p class="description"><?php _e( 'Set it to <strong>-1</strong> to display all slides for the selected <em>slideshow</em> in the following field.', 'furiagamingcommunity_slideshow' ); ?></p>
 		</p>
 		<?php $slideshows = $this->get_slideshows(); ?>
+		<h4><?php _e('Slideshow', 'furiagamingcommunity_slideshow'); ?></h4>
+		<p><?php printf( __('Each <em>slideshow</em> is a custom hierarchical tag for <strong>slides</strong> post type. Follow this <a href="%s">link</a> to add or administrate <em>slideshows</em>.', 'furiagamingcommunity_slideshow' ), admin_url('edit-tags.php?taxonomy=slideshow&post_type=slide') ); ?></p>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'slideshow' ); ?>"><?php _e( 'Select a slideshow:', 'furiagamingcommunity_slideshow' ); ?></label> 
 			<select class="widefat" id="<?php echo $this->get_field_id( 'slideshow' ); ?>" name="<?php echo $this->get_field_name( 'slideshow' ); ?>" <?php disabled( empty( $slideshows ), true ); ?>>
 				<?php if ( empty( $slideshows ) ): ?>
 				<option default><?php _e( 'No slideshows set!', 'furiagamingcommunity_slideshow' ); ?></option>
-				<?php else: ?>
-					<?php foreach( $slideshows as $slideshow ) : ?>
-					<option value="<?php echo $slideshow->term_id; ?>" <?php selected( $slideshow->term_id, $instance['slideshow'] ); ?>><?php echo $slideshow->name; ?></option>
-					<?php endforeach; ?>
-				<?php endif; ?>
+				<?php else: foreach( $slideshows as $slideshow ) : ?>
+				<option value="<?php echo $slideshow->term_id; ?>" <?php selected( $slideshow->term_id, $instance['slideshow'] ); ?>><?php echo $slideshow->name; ?></option>
+				<?php endforeach; endif; ?>
 			</select>
-			<p class="description"><?php printf( __('Each <em>slideshow</em> is a custom hierarchical tag for <strong>slides</strong> post type. Follow this <a href="%s">link</a> to add or administrate <em>slideshows</em>.', 'furiagamingcommunity_slideshow' ), admin_url('edit-tags.php?taxonomy=slideshow&post_type=slide') ); ?></p>
 		</p>
-		<?php 
+		<?php
 	}
 
 	/**
@@ -519,7 +647,7 @@ class FuriaGamingCommunity_Slideshow extends WP_Widget {
 	 */
 	public function update( $new_instance, $old_instance ) {
 		$instance = array();
-		$instance['number'] = ( ! empty( $new_instance['number'] ) ) ? esc_attr( $new_instance['number'] ) : $old_instance['number'];
+		$instance['number'] = ( ! empty( $new_instance['number'] ) ) ? absint( $new_instance['number'] ) : $old_instance['number'];
 		$instance['slideshow'] = ( ! empty( $new_instance['slideshow'] ) ) ? esc_attr( $new_instance['slideshow'] ) : $old_instance['slideshow'];
 
 		return $instance;
