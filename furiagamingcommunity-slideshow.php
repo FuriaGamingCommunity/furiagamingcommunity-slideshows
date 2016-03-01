@@ -516,52 +516,52 @@ class FuriaGamingCommunity_Slideshow extends WP_Widget {
 		if ( $slide_loop->have_posts() ) : 
 
 			$slides = array();
-		$total_slides = $slide_loop->found_posts;
+			$total_slides = $slide_loop->found_posts;
 
-				// The Loop.
-		while ( $slide_loop->have_posts() ) : $slide_loop->the_post();
+			// The Loop.
+			while ( $slide_loop->have_posts() ) : $slide_loop->the_post();
 
-		$slides[] = array(
-			'number'		=> $slide_count,
-			'title' 		=> $post->post_title,
-			'tab'			=> get_post_meta( $post->ID , 'TabTitle' , $single = true ),
-			'link'			=> get_post_meta( $post->ID , 'Permalink' , $single = true ),
-			'content'		=> $post->post_content,
-			'image'			=> get_the_post_thumbnail( $post->ID, 'featured-slide' )
-			);
+				$slides[] = array(
+					'number'		=> $slide_count,
+					'title' 		=> $post->post_title,
+					'tab'			=> get_post_meta( $post->ID , 'TabTitle' , $single = true ),
+					'link'			=> get_post_meta( $post->ID , 'Permalink' , $single = true ),
+					'content'		=> $post->post_content,
+					'image'			=> get_the_post_thumbnail( $post->ID, 'featured-slide' )
+					);
 
-		$slide_count++;
+				$slide_count++;
 
 				// End the loop.
-		endwhile; 
+			endwhile; 
 
-		?>
-		<div id="<?php echo $slideshow . '-slider'; ?>" class="flexslider">
+			?>
+			<div id="<?php echo $slideshow . '-slider'; ?>" class="flexslider">
 
-			<ul class="slides">
+				<ul class="slides">
 
-				<?php for($i = 0; $i < $total_slides; $i++) : ?>
+					<?php for($i = 0; $i < $total_slides; $i++) : ?>
 
-				<li class="slideshow-slide">
-					<?php echo $slides[$i]['image']; ?>
-				</li>
+					<li class="slideshow-slide">
+						<?php echo $slides[$i]['image']; ?>
+					</li>
 
-			<?php endfor; ?>
+					<?php endfor; ?>
 
-		</ul>		
-	</div><!-- .flexslider -->
-	<?php
+				</ul>		
+			</div><!-- .flexslider -->
+			<?php
 
-	else: 
-				// No posts.
+		else: 
+			// No posts.
 		endif;
 
-			// Reset post data.
-	wp_reset_postdata();
+		// Reset post data.
+		wp_reset_postdata();
 
 	else:
-			// No slideshow.
-		endif;
+		// No slideshow.
+	endif;
 
 	echo $after_widget;
 }
@@ -582,21 +582,20 @@ class FuriaGamingCommunity_Slideshow extends WP_Widget {
 			<p class="description"><?php _e( 'Set it to <strong>-1</strong> to display all slides for the selected <em>slideshow</em> in the following field.', 'furiagamingcommunity_slideshow' ); ?></p>
 		</p>
 		<?php $slideshows = $this->get_slideshows(); ?>
+		<h4><?php _e('Slideshow', 'furiagamingcommunity_slideshow'); ?></h4>
+		<p><?php printf( __('Each <em>slideshow</em> is a custom hierarchical tag for <strong>slides</strong> post type. Follow this <a href="%s">link</a> to add or administrate <em>slideshows</em>.', 'furiagamingcommunity_slideshow' ), admin_url('edit-tags.php?taxonomy=slideshow&post_type=slide') ); ?></p>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'slideshow' ); ?>"><?php _e( 'Select a slideshow:', 'furiagamingcommunity_slideshow' ); ?></label> 
 			<select class="widefat" id="<?php echo $this->get_field_id( 'slideshow' ); ?>" name="<?php echo $this->get_field_name( 'slideshow' ); ?>" <?php disabled( empty( $slideshows ), true ); ?>>
 				<?php if ( empty( $slideshows ) ): ?>
 				<option default><?php _e( 'No slideshows set!', 'furiagamingcommunity_slideshow' ); ?></option>
-			<?php else: ?>
-			<?php foreach( $slideshows as $slideshow ) : ?>
-			<option value="<?php echo $slideshow->term_id; ?>" <?php selected( $slideshow->term_id, $instance['slideshow'] ); ?>><?php echo $slideshow->name; ?></option>
-		<?php endforeach; ?>
-	<?php endif; ?>
-</select>
-<p class="description"><?php printf( __('Each <em>slideshow</em> is a custom hierarchical tag for <strong>slides</strong> post type. Follow this <a href="%s">link</a> to add or administrate <em>slideshows</em>.', 'furiagamingcommunity_slideshow' ), admin_url('edit-tags.php?taxonomy=slideshow&post_type=slide') ); ?></p>
-</p>
-<?php 
-}
+				<?php else: foreach( $slideshows as $slideshow ) : ?>
+				<option value="<?php echo $slideshow->term_id; ?>" <?php selected( $slideshow->term_id, $instance['slideshow'] ); ?>><?php echo $slideshow->name; ?></option>
+				<?php endforeach; endif; ?>
+			</select>
+		</p>
+		<?php
+	}
 
 	/**
 	 * Get set slideshows.
@@ -648,7 +647,7 @@ class FuriaGamingCommunity_Slideshow extends WP_Widget {
 	 */
 	public function update( $new_instance, $old_instance ) {
 		$instance = array();
-		$instance['number'] = ( ! empty( $new_instance['number'] ) ) ? esc_attr( $new_instance['number'] ) : $old_instance['number'];
+		$instance['number'] = ( ! empty( $new_instance['number'] ) ) ? absint( $new_instance['number'] ) : $old_instance['number'];
 		$instance['slideshow'] = ( ! empty( $new_instance['slideshow'] ) ) ? esc_attr( $new_instance['slideshow'] ) : $old_instance['slideshow'];
 
 		return $instance;
