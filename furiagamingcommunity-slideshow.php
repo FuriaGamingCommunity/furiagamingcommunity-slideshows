@@ -305,9 +305,7 @@ class FuriaGamingCommunity_Slides {
 		}
 	}
 } // class FuriaGamingCommunity_Slides
-
-// Generate the slide type.
-$slides = new FuriaGamingCommunity_Slides;
+register_activation_hook( basename( __FILE__ ), new FuriaGamingCommunity_Slides );
 
 
 /**
