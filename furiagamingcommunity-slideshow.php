@@ -25,8 +25,8 @@ defined( 'ABSPATH' ) or die( __( 'No script kiddies please!', 'furiagamingcommun
 class FuriaGamingCommunity_Slides {
 
 	/**
-     * Holds the values to be used in the fields callbacks
-     */
+	 * Holds the values to be used in the fields callbacks
+	 */
 	private $options;
 
 	/**
@@ -45,7 +45,7 @@ class FuriaGamingCommunity_Slides {
 
 			// Settings actions
 			add_action( 'admin_menu'				, array( $this, 'add_plugin_page' ) );
-       		add_action( 'admin_init'				, array( $this, 'page_init' ) );
+			add_action( 'admin_init'				, array( $this, 'page_init' ) );
 			
 			// Slide actions
 			add_action( 'do_meta_boxes'				, array( $this , 'slide_image_box' 			) );	
@@ -59,15 +59,6 @@ class FuriaGamingCommunity_Slides {
 			add_filter( 'post_updated_messages'		, array( $this , 'slide_updated_messages' 	) );
 			add_filter( 'manage_edit-slide_columns'	, array( $this , 'slides_edit_columns'		) );
 		
-		} else {
-
-			// Register scritps
-			wp_register_script('furiagamingcommunity_slideshow_flexslider', plugin_dir_url(__FILE__) . 'js/jquery.flexslider.js', array('jquery'), '4.4.2', false);
-			wp_register_script('furiagamingcommunity_slideshow_script', plugin_dir_url(__FILE__) . 'js/furiagamingcommunity-slideshow-script.js', array('jquery'), '1.0.0', false);
-
-			// Enqueue scripts
-			wp_enqueue_script('furiagamingcommunity_slideshow_flexslider');
-			wp_enqueue_script('furiagamingcommunity_slideshow_script');
 		}
 	}
 	
@@ -482,7 +473,8 @@ class FuriaGamingCommunity_Slideshow extends WP_Widget {
 	public function init(){
 		
 		// Add notices.
-		add_action( 'admin_notices', array( &$this, 'notices' ) );
+		if ( is_admin() )
+			add_action( 'admin_notices', array( &$this, 'notices' ),10 ,2 );
 
 		if ( is_wp_error( $this->error ) )
 			$this->notices( $this->error->get_error_message(), 'warning is-dismissible' );
@@ -516,9 +508,6 @@ class FuriaGamingCommunity_Slideshow extends WP_Widget {
 			$before_widget = str_replace('class="', 'class="slideshow ', $before_widget);
 		echo $before_widget;
 
-		// In case we are already inside a post, save the $post global so it doesn't get overwritten.
-		global $post;
-		$temporary_post = $post;
 		$slide_count = 1;
 
 		if ( !empty($slideshow) ) :
@@ -531,58 +520,71 @@ class FuriaGamingCommunity_Slideshow extends WP_Widget {
 				) );
 		
 			// Check for slides.
-		if ( $slide_loop->have_posts() ) : 
+			if ( $slide_loop->have_posts() ) : 
 
-			$slides = array();
-			$total_slides = $slide_loop->found_posts;
+				$slides = array();
+				$total_slides = $slide_loop->found_posts;
 
-			// The Loop.
-			while ( $slide_loop->have_posts() ) : $slide_loop->the_post();
+				// The Loop.
+				while ( $slide_loop->have_posts() ) : $slide_loop->the_post();
 
-				$slides[] = array(
-					'number'		=> $slide_count,
-					'title' 		=> $post->post_title,
-					'tab'			=> get_post_meta( $post->ID , 'TabTitle' , $single = true ),
-					'link'			=> get_post_meta( $post->ID , 'Permalink' , $single = true ),
-					'content'		=> $post->post_content,
-					'image'			=> get_the_post_thumbnail( $post->ID, 'featured-slide' )
-					);
+					$slides[] = array(
+						'number'		=> $slide_count,
+						'title' 		=> $post->post_title,
+						'tab'			=> get_post_meta( $post->ID , 'TabTitle' , $single = true ),
+						'link'			=> get_post_meta( $post->ID , 'Permalink' , $single = true ),
+						'content'		=> $post->post_content,
+						'image'			=> get_the_post_thumbnail( $post->ID, 'featured-slide' )
+						);
 
-				$slide_count++;
+					$slide_count++;
 
 				// End the loop.
-			endwhile; 
+				endwhile; 
 
-			?>
-			<div id="<?php echo $slideshow . '-slider'; ?>" class="flexslider">
+				// Begin the slideshow. ?>
+				<div id="<?php echo $slideshow . '-slider'; ?>" class="flexslider">
 
-				<ul class="slides">
+					<ol class="slideshow-tabs">
+						<?php for($i = 0; $i < $total_slides; $i++) : ?>
+						<li class="slideshow-tab slideshow-tab-<?php echo $i+1; ?>">
+							<span class="slideshow-tab-title"><?php echo $slides[$i]['tab']; ?></span>
+						</li><!-- .slideshow-tab-<?php echo $i+1; ?> -->
+						<?php endfor; ?>
+					</ol><!-- .slideshow-tabs -->
 
-					<?php for($i = 0; $i < $total_slides; $i++) : ?>
+					<ul class="slides">
+						<?php for($i = 0; $i < $total_slides; $i++) : ?>
+						<li class="slideshow-slide slideshow-slide-<?php echo $i+1; ?>">
+							<a href="<?php echo $slides[$i]['link']; ?>" title="<?php echo $slides[$i]['title']; ?>" target="_blank" ><?php echo $slides[$i]['image']; ?></a>
+							<div class="flex-caption">
+								<h2 class="slide-title"><a href="<?php echo $slides[$i]['link']; ?>" target="_blank" ><?php echo $slides[$i]['title']; ?></a></h2>
+								<p class="slide-content">
+									<?php echo $slides[$i]['content']; ?> <a class="slide-more read-more" href="<?php echo $slides[$i]['link']; ?>" title="<?php echo $slides[$i]['title']; ?>" target="_blank" ><?php _e('Read More', 'furiagamingcommunity_slideshow'); ?></a>
+								</p>
+							</div><!-- .flex-caption -->
+						</li><!-- .slideshow-slide-<?php echo $i+1; ?> -->
+						<?php endfor; ?>
+					</ul><!-- .slides -->
 
-					<li class="slideshow-slide">
-						<?php echo $slides[$i]['image']; ?>
-					</li>
+				</div><!-- .flexslider -->
+				<?php // End the slideshow.
 
-					<?php endfor; ?>
+			else: 
+				// No posts.
+				$this->notices( __('There are not any posts set for the selected slideshow.','furiagamingcommunity_slideshow'), 'info' );
+			endif;
 
-				</ul>		
-			</div><!-- .flexslider -->
-			<?php
+			// Reset post data.
+			wp_reset_postdata();
 
-		else: 
-			// No posts.
+		else:
+			// No slideshow.
+			$this->notices( __('No slideshow set!','furiagamingcommunity_slideshow'), 'warning' );
 		endif;
 
-		// Reset post data.
-		wp_reset_postdata();
-
-	else:
-		// No slideshow.
-	endif;
-
-	echo $after_widget;
-}
+		echo $after_widget;
+	}
 
 	/**
 	 * Back-end widget form.
@@ -597,10 +599,9 @@ class FuriaGamingCommunity_Slideshow extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id( 'number' ); ?>"><?php _e( 'Number of slides to display:', 'furiagamingcommunity_slideshow' ); ?></label> 
 			<input class="widefat" id="<?php echo $this->get_field_id( 'number' ); ?>" name="<?php echo $this->get_field_name( 'number' ); ?>" type="number" min="1" max="9" value="<?php echo esc_attr( $number ); ?>">
-			<p class="description"><?php _e( 'Set it to <strong>-1</strong> to display all slides for the selected <em>slideshow</em> in the following field.', 'furiagamingcommunity_slideshow' ); ?></p>
+			<span class="description"><?php _e( 'Set to <strong>-1</strong> to display all slides.', 'furiagamingcommunity_slideshow' ); ?></span>
 		</p>
 		<?php $slideshows = $this->get_slideshows(); ?>
-		<h4><?php _e('Slideshow', 'furiagamingcommunity_slideshow'); ?></h4>
 		<p><?php printf( __('Each <em>slideshow</em> is a custom hierarchical tag for <strong>slides</strong> post type. Follow this <a href="%s">link</a> to add or administrate <em>slideshows</em>.', 'furiagamingcommunity_slideshow' ), admin_url('edit-tags.php?taxonomy=slideshow&post_type=slide') ); ?></p>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'slideshow' ); ?>"><?php _e( 'Select a slideshow:', 'furiagamingcommunity_slideshow' ); ?></label> 
@@ -642,13 +643,14 @@ class FuriaGamingCommunity_Slideshow extends WP_Widget {
 	 * @param string $message Message to be printed as a notice.
 	 * @param string $type Type of message to be set.
 	 */
-	public function notices( $message = '', $type = '' ) {
+	public function notices( $message, $type = 'info' ) {
 		if ( !empty( $message ) && !empty( $message ) ) {
 			$class = 'notice notice-' . $type;
 
 			printf( '<div class="%1$s"><p>%2$s</p></div>', $class, $message );
 		} else {
 			// No notice
+			return false;
 		}
 	}
 
@@ -672,9 +674,18 @@ class FuriaGamingCommunity_Slideshow extends WP_Widget {
 
 } // class FuriaGamingCommunity_Slideshow
 
-// Register the widget.
 add_action( 'widgets_init', function(){
+
+	// Register widget.
 	register_widget( 'FuriaGamingCommunity_Slideshow' );
+
+	// Register scritps.
+	wp_register_script('furiagamingcommunity_slideshow_flexslider', plugin_dir_url(__FILE__) . 'js/jquery.flexslider.js', array('jquery'), '4.4.2', false);
+	wp_register_script('furiagamingcommunity_slideshow_script', plugin_dir_url(__FILE__) . 'js/furiagamingcommunity-slideshow-script.js', array('jquery'), '1.0.0', false);
+
+	// Enqueue scripts.
+	wp_enqueue_script('furiagamingcommunity_slideshow_flexslider');
+	wp_enqueue_script('furiagamingcommunity_slideshow_script');
 });
 
 // Register the text domain.
@@ -682,5 +693,4 @@ function FuriaGamingCommunity_Slideshow_load_textdomain() {
 	load_plugin_textdomain( 'furiagamingcommunity_slideshow', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 }
 add_action('plugins_loaded', 'FuriaGamingCommunity_Slideshow_load_textdomain');
-
 ?>
