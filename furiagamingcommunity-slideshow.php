@@ -13,7 +13,8 @@
  * Text Domain: furiagamingcommunity_slideshow
 **/
 
-defined( 'ABSPATH' ) or die( __( 'No script kiddies please!', 'furiagamingcommunity_slideshow' ) );
+// Exit if accessed directly
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Registers the "Slide" custom post type.

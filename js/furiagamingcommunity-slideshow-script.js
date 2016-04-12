@@ -1,10 +1,13 @@
-/*
+/**
  * Furia Gaming Community - Slideshow
  * Author: Xavier Giménez Segovia
  */
+var $ = jQuery.noConflict();
 
-$(window).load(function() {
-  $('.flexslider').flexslider({
-    animation: "slide"
-  });
-})(jQuery);
+ $(window).load(function() {
+ 	if ( $('.flexslider').length > 0 ) {
+ 		$('.flexslider').flexslider({
+ 			animation: "slide"
+ 		});
+ 	}
+ })(jQuery);
