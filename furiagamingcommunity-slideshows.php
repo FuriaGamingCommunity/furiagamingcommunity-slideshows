@@ -60,7 +60,7 @@ class FuriaGamingCommunity_Slideshows {
 
 	/**
 	 * A dummy constructor to prevent FuriaGamingCommunity_Slideshows from being loaded more than once.
-	 * @since 1.0.0
+	 * @since 1.2.0
 	 */
 	private function __construct(){
 
@@ -83,7 +83,7 @@ class FuriaGamingCommunity_Slideshows {
 	/**
 	 * Setup classes.
 	 *
-	 * @since 1.0.0
+	 * @since 1.2.0
 	 */
 	private function classes(){
 
@@ -93,7 +93,7 @@ class FuriaGamingCommunity_Slideshows {
 	/**
 	 * Bootstrap constants.
 	 *
-	 * @since 1.0.0
+	 * @since 1.2.0
 	 *
 	 * @uses plugin_dir_path()
 	 * @uses plugin_dir_url()
@@ -111,7 +111,7 @@ class FuriaGamingCommunity_Slideshows {
 	/**
 	 * Include required files.
 	 *
-	 * @since 1.0.0
+	 * @since 1.2.0
 	 */
 	private function includes(){
 
@@ -124,7 +124,7 @@ class FuriaGamingCommunity_Slideshows {
 	/**
 	 * Declare class constants.
 	 *
-	 * @since 1.0.0
+	 * @since 1.2.0
 	 */
 	private function setup_globals(){
 
@@ -163,7 +163,7 @@ class FuriaGamingCommunity_Slideshows {
 
 /**
  * Launch a single instance of the plugin
- * @since 1.0.0
+ * @since 1.2.0
  *
  * @return FuriaGamingCommunity_Slideshows The plugin instance
  */
@@ -174,7 +174,7 @@ add_action('plugins_loaded', 'furiagamingcommunity_slideshows');
 
 /**
  * Register the text domain
- * @since 1.0.0
+ * @since 1.2.0
  */
 function furiagamingcommunity_slideshows_load_textdomain(){
 	load_plugin_textdomain('furiagamingcommunity_slideshows', false, dirname(plugin_basename(__FILE__)) . '/languages');

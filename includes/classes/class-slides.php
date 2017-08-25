@@ -22,7 +22,7 @@ class Slides {
 	private $options;
 	/**
 	 * Register the custom post and taxonomy with WordPress on init
-	 * @since 1.0.0
+	 * @since 1.2.0
 	 */
 	public function __construct() {
 
@@ -53,7 +53,7 @@ class Slides {
 
 	/**
 	 * Add a featured image size for the slides
-	 * @since 1.0.0
+	 * @since 1.2.0
 	 */
 	public function register_slide_size() {
 
@@ -124,7 +124,7 @@ class Slides {
 
 	/**
 	 * Register a custom post taxonomy for Slideshows
-	 * @since 1.0.0
+	 * @since 1.2.0
 	 */
 	public function register_slideshows() {
 
@@ -164,7 +164,7 @@ class Slides {
 
 	/**
 	 * Place the "featured image" box in the main listing, since it's the key element here.
-	 * @since 1.0.0
+	 * @since 1.2.0
 	 */
 	public function slide_image_box() {
 		$slide_image_title = __('Set the slide image', 'furiagamingcommunity_slideshows') . '(' . $this->options['width'] . 'x' . $this->options['height'] . ')';
@@ -174,7 +174,7 @@ class Slides {
 
 	/**
 	 * Get rid of the "slug" box, show our permalink box instead.
-	 * @since 1.0.0
+	 * @since 1.2.0
 	 */
 	public function change_slide_link() {
 		remove_meta_box( 'slugdiv', 'slide', 'core' );
@@ -183,7 +183,7 @@ class Slides {
 
 	/**
 	 * Display inputs for our custom slide meta fields
-	 * @since 1.0.0
+	 * @since 1.2.0
 	 */
 	public function settings_box( $object , $box ) {
 		wp_nonce_field( basename( __FILE__ ), 'slideshow-settings-box' );
@@ -253,7 +253,7 @@ class Slides {
 
 	/**
 	 * Customize backend messages when a slide is updated
-	 * @since 1.0.0
+	 * @since 1.2.0
 	 */
 	public function slide_updated_messages( $slide_messages ) {
 		global $post, $post_ID;
@@ -277,7 +277,7 @@ class Slides {
 
 	/**
 	 * Adds the slide featured image and link to the slides page
-	 * @since 1.0.0
+	 * @since 1.2.0
 	 */
 	public function slides_edit_columns( $columns ) {
 		$columns = array(
@@ -294,7 +294,7 @@ class Slides {
 
 	/**
 	 * Adds content to the custom column format
-	 * @since 1.0.0
+	 * @since 1.2.0
 	 */
 	public function slides_custom_columns( $columns ) {
 		global $post;
@@ -323,7 +323,7 @@ class Slides {
 
 	/**
 	 * Add options page
-	 * @since 1.1.0
+	 * @since 1.2.0
 	 */
 	public function add_plugin_page() {
 		// This page will be under "Settings"
@@ -338,7 +338,7 @@ class Slides {
 
 	/**
 	 * Options page callback
-	 * @since 1.1.0
+	 * @since 1.2.0
 	 */
 	public function create_admin_page() {
 		// Set class property
@@ -361,7 +361,7 @@ class Slides {
 
 	/**
 	 * Register and add settings
-	 * @since 1.1.0
+	 * @since 1.2.0
 	 */
 	public function page_init() {
 		register_setting(
@@ -393,7 +393,7 @@ class Slides {
 
 	/**
 	 * Sanitize each setting field as needed
-	 * @since 1.1.0
+	 * @since 1.2.0
 	 * @param array $input Contains all settings fields as array keys
 	 */
 	public function sanitize( $input ) {
@@ -407,7 +407,7 @@ class Slides {
 
 	/**
 	 * Print the Section text
-	 * @since 1.1.0
+	 * @since 1.2.0
 	 */
 	public function print_section_info() {
 		_e('Set the default size for each slide');
@@ -415,7 +415,7 @@ class Slides {
 
 	/**
 	 * Get the settings option array and print one of its values
-	 * @since 1.1.0
+	 * @since 1.2.0
 	 */
 	public function width_callback() {
 		printf(
@@ -426,7 +426,7 @@ class Slides {
 
 	/**
 	 * Get the settings option array and print one of its values
-	 * @since 1.1.0
+	 * @since 1.2.0
 	 */
 	public function height_callback() {
 		printf(
