@@ -155,7 +155,6 @@ class Slides_WP_Widget extends WP_Widget {
 
 					<div class="cd-slider-nav">
 						<nav>
-							<span class="cd-marker item-1"></span>
 							<ul>
 								<?php for ( $i = 0; $i < $total_slides; $i++ ) : ?>
 									<li<?php if ( $i == 0 ) : ?> class="selected"<? endif; ?>><a href="#<?php echo $i; ?>"><?php echo $slides[$i]['tab']; ?></a></li>
