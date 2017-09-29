@@ -114,7 +114,7 @@ class Slides_WP_Widget extends WP_Widget {
 				endwhile;
 
 				?>
-				<section class="cd-hero">
+				<div class="cd-hero">
 					<ul class="cd-hero-slider autoplay">
 						<?php for($i = 0; $i < $total_slides; $i++) : ?>
 
@@ -162,7 +162,7 @@ class Slides_WP_Widget extends WP_Widget {
 							</ul>
 						</nav>
 					</div> <!-- .cd-slider-nav -->
-				</section> <!-- .cd-hero -->
+				</div> <!-- .cd-hero -->
 				<?php
 
 			else:
