@@ -1,11 +1,11 @@
 jQuery(document).ready(function($){
-	var slidesWrapper = $('.cd-hero-slider');
+	var slidesWrapper = $('.hero-slider');
 
-	//check if a .cd-hero-slider exists in the DOM
+	//check if a .hero-slider exists in the DOM
 	if ( slidesWrapper.length > 0 ) {
-		var primaryNav = $('.cd-primary-nav'),
-			sliderNav = $('.cd-slider-nav'),
-			navigationMarker = $('.cd-marker'),
+		var primaryNav = $('.primary-nav'),
+			sliderNav = $('.slider-nav'),
+			navigationMarker = $('.marker'),
 			slidesNumber = slidesWrapper.children('li').length,
 			visibleSlidePosition = 0,
 			autoPlayId,
@@ -19,7 +19,7 @@ jQuery(document).ready(function($){
 
 		//on mobile - open/close primary navigation clicking/tapping the menu icon
 		primaryNav.on('click', function(event){
-			if($(event.target).is('.cd-primary-nav')) $(this).children('ul').toggleClass('is-visible');
+			if($(event.target).is('.primary-nav')) $(this).children('ul').toggleClass('is-visible');
 		});
 
 		//change visible slide
@@ -92,7 +92,7 @@ jQuery(document).ready(function($){
 	}
 
 	function uploadVideo(container) {
-		container.find('.cd-bg-video-wrapper').each(function(){
+		container.find('.bg-video-wrapper').each(function(){
 			var videoWrapper = $(this);
 			if( videoWrapper.is(':visible') ) {
 				// if visible - we are not on a mobile device
@@ -100,7 +100,7 @@ jQuery(document).ready(function($){
 					video = $('<video loop><source src="'+videoUrl+'.mp4" type="video/mp4" /><source src="'+videoUrl+'.webm" type="video/webm" /></video>');
 				video.appendTo(videoWrapper);
 				// play video if first slide
-				if(videoWrapper.parent('.cd-bg-video.selected').length > 0) video.get(0).play();
+				if(videoWrapper.parent('.bg-video.selected').length > 0) video.get(0).play();
 			}
 		});
 	}

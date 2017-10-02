@@ -1,4 +1,4 @@
-.cd-hero
+.widget .hero
 {
     position: relative;
 
@@ -6,7 +6,7 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.cd-hero-slider
+.widget .hero .hero-slider
 {
     position: relative;
 
@@ -18,7 +18,7 @@
     list-style: none;
 }
 
-.cd-hero-slider li
+.widget .hero .hero-slider li
 {
     position: absolute;
     top: 0;
@@ -34,7 +34,7 @@
             transform: translateX(100%);
 }
 
-.cd-hero-slider li.selected
+.widget .hero .hero-slider li.selected
 {
     /* this is the visible slide */
     position: relative;
@@ -46,7 +46,7 @@
             transform: translateX(0);
 }
 
-.cd-hero-slider li.move-left
+.widget .hero .hero-slider li.move-left
 {
     /* slide hidden on the left */
     -webkit-transform: translateX(-100%);
@@ -56,8 +56,8 @@
             transform: translateX(-100%);
 }
 
-.cd-hero-slider li.is-moving,
-.cd-hero-slider li.selected
+.widget .hero .hero-slider li.is-moving,
+.widget .hero .hero-slider li.selected
 {
     /* the is-moving class is assigned to the slide which is moving outside the viewport */
     -webkit-transition: -webkit-transform .5s;
@@ -65,63 +65,47 @@
             transition:         transform .5s;
 }
 
-@media only screen and (min-width: 768px)
-{
-    .cd-hero-slider
-    {
-        height: 500px;
-    }
-}
-
-@media only screen and (min-width: 1170px)
-{
-    .cd-hero-slider
-    {
-        height: 680px;
-    }
-}
-
 /* --------------------------------
 Single slide style
 -------------------------------- */
-.cd-hero-slider li
+.widget .hero .hero-slider li
 {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
 }
 
-.cd-hero-slider li:first-of-type
+.widget .hero .hero-slider li:first-of-type
 {
     background-color: #333;
 }
 
-.cd-hero-slider li:nth-of-type(2)
+.widget .hero .hero-slider li:nth-of-type(2)
 {
     background-color: #303030;
     background-image: url('../assets/tech-1-mobile.jpg');
 }
 
-.cd-hero-slider li:nth-of-type(3)
+.widget .hero .hero-slider li:nth-of-type(3)
 {
     background-color: #272727;
     background-image: url('../assets/tech-2-mobile.jpg');
 }
 
-.cd-hero-slider li:nth-of-type(4)
+.widget .hero .hero-slider li:nth-of-type(4)
 {
     background-color: #242424;
     background-image: url('../assets/video-replace-mobile.jpg');
 }
 
-.cd-hero-slider li:nth-of-type(5)
+.widget .hero .hero-slider li:nth-of-type(5)
 {
     background-color: #212121;
     background-image: url(../assets/img.jpg);
 }
 
-.cd-hero-slider .cd-full-width,
-.cd-hero-slider .cd-half-width
+.widget .hero .hero-slider .full-width,
+.widget .hero .hero-slider .half-width
 {
     position: absolute;
     z-index: 1;
@@ -145,13 +129,13 @@ Single slide style
             backface-visibility: hidden;
 }
 
-.cd-hero-slider .cd-img-container
+.widget .hero .hero-slider .img-container
 {
     /* hide image on mobile device */
     display: none;
 }
 
-.cd-hero-slider .cd-img-container img
+.widget .hero .hero-slider .img-container img
 {
     position: absolute;
     top: 50%;
@@ -166,7 +150,7 @@ Single slide style
             transform: translateX(-50%) translateY(-50%);
 }
 
-.cd-hero-slider .cd-bg-video-wrapper
+.widget .hero .hero-slider .bg-video-wrapper
 {
     position: absolute;
     top: 0;
@@ -180,7 +164,7 @@ Single slide style
     height: 100%;
 }
 
-.cd-hero-slider .cd-bg-video-wrapper video
+.widget .hero .hero-slider .bg-video-wrapper video
 {
     position: absolute;
     top: 50%;
@@ -204,335 +188,126 @@ Single slide style
             transform: translateX(-50%) translateY(-50%);
 }
 
-.cd-hero-slider h2,
-.cd-hero-slider p
+.widget .hero .hero-slider h2,
+.widget .hero .hero-slider p
 {
     line-height: 1.2;
 
-    width: 90%;
-    max-width: 400px;
+    max-width: 1320px;
     margin: 0 auto 14px;
+    padding: 0 4.5455%;
 
     color: #fff;
     text-shadow: 0 1px 3px rgba(0, 0, 0, .1);
 }
 
-.cd-hero-slider h2
+.widget .hero .hero-slider h2
 {
-    font-size: 2rem;
-}
-
-.cd-hero-slider p
-{
-    font-size: 1rem;
-    line-height: 1.4;
-}
-
-.cd-hero-slider .cd-btn
-{
-    font-size: 1.3rem;
+    font-family: 'Merriweather', serif;
+    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: 700;
+    line-height: 1.25;
+
+    clear: both;
+
+    margin-bottom: .5em;
+
+    letter-spacing: .025em;
+
+    text-shadow: 1px 1px #222, 2px 2px #222, 3px 3px #222;
+
+    text-rendering: optimizeLegibility;
+}
+
+.widget .hero .hero-slider h2 a
+{
+    color: white;
+}
+
+.widget .hero .hero-slider p
+{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    font-size: 1rem;
+    line-height: 1.75;
+}
+
+.widget .hero .hero-slider .btn
+{
+    font-weight: 700;
+    line-height: 1;
 
     display: inline-block;
 
-    margin-top: .8em;
-    padding: 1.2em 1.4em;
+    padding: .84375em .875em .78125em;
 
-    -webkit-transition: background-color .2s;
-       -moz-transition: background-color .2s;
-            transition: background-color .2s;
-    letter-spacing: 1px;
+    letter-spacing: .046875em;
     text-transform: uppercase;
 
-    color: #fff;
+    color: #333;
+    border: 1px solid #fa0;
+    border-radius: 2px;
     background-color: #fa0;
 }
 
-.cd-hero-slider .cd-btn.secondary
+.widget .hero .hero-slider .btn.secondary
 {
     background-color: rgba(22, 26, 30, .8);
 }
 
-.cd-hero-slider .cd-btn:nth-of-type(2)
+.widget .hero .hero-slider .btn:nth-of-type(2)
 {
     margin-left: 1em;
 }
 
-.no-touch .cd-hero-slider .cd-btn:hover
+.no-touch .widget .hero .hero-slider .btn:hover
 {
     background-color: #d44457;
 }
 
-.no-touch .cd-hero-slider .cd-btn.secondary:hover
+.no-touch .widget .hero .hero-slider .btn.secondary:hover
 {
     background-color: #161a1e;
-}
-
-@media only screen and (min-width: 768px)
-{
-    .cd-hero-slider li:nth-of-type(2)
-    {
-        background-image: none;
-    }
-
-
-    .cd-hero-slider li:nth-of-type(3)
-    {
-        background-image: none;
-    }
-
-
-    .cd-hero-slider li:nth-of-type(4)
-    {
-        background-image: none;
-    }
-
-
-    .cd-hero-slider .cd-full-width,
-    .cd-hero-slider .cd-half-width
-    {
-        padding-top: 150px;
-    }
-
-
-    .cd-hero-slider .cd-bg-video-wrapper
-    {
-        display: block;
-    }
-
-
-    .cd-hero-slider .cd-half-width
-    {
-        width: 45%;
-    }
-
-
-    .cd-hero-slider .cd-half-width:first-of-type
-    {
-        left: 5%;
-    }
-
-
-    .cd-hero-slider .cd-half-width:nth-of-type(2)
-    {
-        right: 5%;
-        left: auto;
-    }
-
-
-    .cd-hero-slider .cd-img-container
-    {
-        display: block;
-    }
-
-    .cd-hero-slider h2
-    {
-        font-size: 2.4em;
-        font-weight: 300;
-    }
-
-    .cd-hero-slider .cd-btn
-    {
-        font-size: 1.4rem;
-    }
-}
-
-@media only screen and (min-width: 1170px)
-{
-    .cd-hero-slider .cd-full-width,
-    .cd-hero-slider .cd-half-width
-    {
-        padding-top: 220px;
-    }
-
-    .cd-hero-slider h2,
-    .cd-hero-slider p
-    {
-        margin-bottom: 20px;
-    }
-
-    .cd-hero-slider h2
-    {
-        font-size: 3.2em;
-    }
-
-    .cd-hero-slider p
-    {
-        font-size: 1.6rem;
-    }
-}
-
-/* --------------------------------
-Single slide animation
--------------------------------- */
-@media only screen and (min-width: 768px)
-{
-    .cd-hero-slider .cd-half-width
-    {
-        -webkit-transform: translateX(40px);
-           -moz-transform: translateX(40px);
-            -ms-transform: translateX(40px);
-             -o-transform: translateX(40px);
-                transform: translateX(40px);
-
-        opacity: 0;
-    }
-
-    .cd-hero-slider .move-left .cd-half-width
-    {
-        -webkit-transform: translateX(-40px);
-           -moz-transform: translateX(-40px);
-            -ms-transform: translateX(-40px);
-             -o-transform: translateX(-40px);
-                transform: translateX(-40px);
-    }
-
-    .cd-hero-slider .selected .cd-half-width
-    {
-        -webkit-transform: translateX(0);
-           -moz-transform: translateX(0);
-            -ms-transform: translateX(0);
-             -o-transform: translateX(0);
-                transform: translateX(0);
-        /* this is the visible slide */
-
-        opacity: 1;
-    }
-
-    .cd-hero-slider .is-moving .cd-half-width
-    {
-        /* this is the slide moving outside the viewport
-    wait for the end of the transition on the <li> parent before set opacity to 0 and translate to 40px/-40px */
-        -webkit-transition: opacity 0s .5s, -webkit-transform 0s .5s;
-           -moz-transition: opacity 0s .5s, -moz-transform 0s .5s;
-                transition: opacity 0s .5s, transform 0s .5s;
-    }
-
-    .cd-hero-slider li.selected.from-left .cd-half-width:nth-of-type(2),
-    .cd-hero-slider li.selected.from-right .cd-half-width:first-of-type
-    {
-        /* this is the selected slide - different animation if it's entering from left or right */
-        -webkit-transition: opacity .4s .2s, -webkit-transform .5s .2s;
-           -moz-transition: opacity .4s .2s, -moz-transform .5s .2s;
-                transition: opacity .4s .2s, transform .5s .2s;
-    }
-
-    .cd-hero-slider li.selected.from-left .cd-half-width:first-of-type,
-    .cd-hero-slider li.selected.from-right .cd-half-width:nth-of-type(2)
-    {
-        /* this is the selected slide - different animation if it's entering from left or right */
-        -webkit-transition: opacity .4s .4s, -webkit-transform .5s .4s;
-           -moz-transition: opacity .4s .4s, -moz-transform .5s .4s;
-                transition: opacity .4s .4s, transform .5s .4s;
-    }
-
-    .cd-hero-slider .cd-full-width h2,
-    .cd-hero-slider .cd-full-width p,
-    .cd-hero-slider .cd-full-width .cd-btn
-    {
-        -webkit-transform: translateX(100px);
-           -moz-transform: translateX(100px);
-            -ms-transform: translateX(100px);
-             -o-transform: translateX(100px);
-                transform: translateX(100px);
-
-        opacity: 0;
-    }
-
-    .cd-hero-slider .move-left .cd-full-width h2,
-    .cd-hero-slider .move-left .cd-full-width p,
-    .cd-hero-slider .move-left .cd-full-width .cd-btn
-    {
-        -webkit-transform: translateX(-100px);
-           -moz-transform: translateX(-100px);
-            -ms-transform: translateX(-100px);
-             -o-transform: translateX(-100px);
-                transform: translateX(-100px);
-
-        opacity: 0;
-    }
-
-    .cd-hero-slider .selected .cd-full-width h2,
-    .cd-hero-slider .selected .cd-full-width p,
-    .cd-hero-slider .selected .cd-full-width .cd-btn
-    {
-        -webkit-transform: translateX(0);
-           -moz-transform: translateX(0);
-            -ms-transform: translateX(0);
-             -o-transform: translateX(0);
-                transform: translateX(0);
-        /* this is the visible slide */
-
-        opacity: 1;
-    }
-
-    .cd-hero-slider li.is-moving .cd-full-width h2,
-    .cd-hero-slider li.is-moving .cd-full-width p,
-    .cd-hero-slider li.is-moving .cd-full-width .cd-btn
-    {
-        /* this is the slide moving outside the viewport
-    wait for the end of the transition on the li parent before set opacity to 0 and translate to 100px/-100px */
-        -webkit-transition: opacity 0s .5s, -webkit-transform 0s .5s;
-           -moz-transition: opacity 0s .5s, -moz-transform 0s .5s;
-                transition: opacity 0s .5s, transform 0s .5s;
-    }
-
-    .cd-hero-slider li.selected h2
-    {
-        -webkit-transition: opacity .4s .2s, -webkit-transform .5s .2s;
-           -moz-transition: opacity .4s .2s, -moz-transform .5s .2s;
-                transition: opacity .4s .2s, transform .5s .2s;
-    }
-
-    .cd-hero-slider li.selected p
-    {
-        -webkit-transition: opacity .4s .3s, -webkit-transform .5s .3s;
-           -moz-transition: opacity .4s .3s, -moz-transform .5s .3s;
-                transition: opacity .4s .3s, transform .5s .3s;
-    }
-
-    .cd-hero-slider li.selected .cd-btn
-    {
-        -webkit-transition: opacity .4s .4s, -webkit-transform .5s .4s, background-color .2s 0s;
-           -moz-transition: opacity .4s .4s, -moz-transform .5s .4s, background-color .2s 0s;
-                transition: opacity .4s .4s, transform .5s .4s, background-color .2s 0s;
-    }
 }
 
 /* --------------------------------
 Slider navigation
 -------------------------------- */
-.cd-slider-nav
+.slider-nav
 {
     line-height: 0;
 
+    position: relative;
     z-index: 2;
 
+    max-width: 1320px;
+    margin: 0 auto;
     margin-bottom: 1.6153846154em;
 
-    text-align: left;
-    text-align: center;
     text-align: left;
 
     background: rgba(51, 51, 51,.75);
 }
 
-.cd-slider-nav nav,
-.cd-slider-nav ul,
-.cd-slider-nav li,
-.cd-slider-nav a
+.slider-nav nav,
+.slider-nav ul,
+.slider-nav li,
+.slider-nav a
 {
     height: 100%;
 }
 
-.cd-slider-nav nav
+.slider-nav nav
 {
     position: relative;
 
     display: inline-block;
+
+    padding: 0 4.5455%;
 }
 
-.cd-slider-nav .cd-marker
+.slider-nav .marker
 {
     position: absolute;
     bottom: 0;
@@ -550,7 +325,7 @@ Slider navigation
     box-shadow: inset 0 2px 0 currentColor;
 }
 
-.cd-slider-nav .cd-marker.item-2
+.slider-nav .marker.item-2
 {
     -webkit-transform: translateX(100%);
        -moz-transform: translateX(100%);
@@ -559,7 +334,7 @@ Slider navigation
             transform: translateX(100%);
 }
 
-.cd-slider-nav .cd-marker.item-3
+.slider-nav .marker.item-3
 {
     -webkit-transform: translateX(200%);
        -moz-transform: translateX(200%);
@@ -568,7 +343,7 @@ Slider navigation
             transform: translateX(200%);
 }
 
-.cd-slider-nav .cd-marker.item-4
+.slider-nav .marker.item-4
 {
     -webkit-transform: translateX(300%);
        -moz-transform: translateX(300%);
@@ -577,7 +352,7 @@ Slider navigation
             transform: translateX(300%);
 }
 
-.cd-slider-nav .cd-marker.item-5
+.slider-nav .marker.item-5
 {
     -webkit-transform: translateX(400%);
        -moz-transform: translateX(400%);
@@ -586,13 +361,13 @@ Slider navigation
             transform: translateX(400%);
 }
 
-.cd-slider-nav ul,
-.widget .cd-slider-nav ul
+.slider-nav ul,
+.widget .slider-nav ul
 {
     margin: 0;
 }
 
-.cd-slider-nav ul::after
+.slider-nav ul::after
 {
     display: table;
     clear: both;
@@ -600,30 +375,30 @@ Slider navigation
     content: '';
 }
 
-.cd-slider-nav li
+.slider-nav li
 {
     display: inline-block;
     float: left;
 }
 
-.cd-slider-nav li.selected a
+.slider-nav li.selected a
 {
     color: #333;
     border: 1px solid #fa0;
     background-color: #fa0;
 }
 
-.cd-slider-nav li.selected a:hover
+.slider-nav li.selected a:hover
 {
     background-color: #fb0;
 }
 
-.no-touch .cd-slider-nav li.selected a:hover
+.no-touch .slider-nav li.selected a:hover
 {
     background-color: transparent;
 }
 
-.cd-slider-nav a
+.slider-nav a
 {
     font-family: 'Open Sans', sans-serif;
     font-size: 1rem;
@@ -644,29 +419,29 @@ Slider navigation
     background-color: rgba(0, 0, 0, 0);
 }
 
-.cd-slider-nav a + a
+.slider-nav a + a
 {
     margin-left: .5384615385em;
 }
 
-.cd-slider-nav li:first-child a
+.slider-nav li:first-child a
 {
     border-top-left-radius: 2px;
     border-bottom-left-radius: 2px;
 }
 
-.cd-slider-nav li:last-child a
+.slider-nav li:last-child a
 {
     border-top-right-radius: 2px;
     border-bottom-right-radius: 2px;
 }
 
-.cd-slider-nav a:hover
+.slider-nav a:hover
 {
     border-color: #fb0;
 }
 
-.cd-slider-nav a:before
+.slider-nav a:before
 {
     position: absolute;
     z-index: -100;
@@ -686,17 +461,263 @@ Slider navigation
     background-image: linear-gradient(rgba(255, 187, 0, .5), rgba(255, 187, 0, 0));
 }
 
-.cd-slider-nav a:hover:before
+.slider-nav a:hover:before
 {
     opacity: 1;
 }
 
-@media only screen and (min-width: 768px)
+/**
+ * 14.1 - >= 710px
+ */
+
+@media screen and (min-width: 44.375em)
 {
-    .cd-slider-nav a
+    .widget .hero .hero-slider
+    {
+        height: 500px;
+    }
+
+    .widget .hero .hero-slider li:nth-of-type(2)
+    {
+        background-image: none;
+    }
+
+
+    .widget .hero .hero-slider li:nth-of-type(3)
+    {
+        background-image: none;
+    }
+
+
+    .widget .hero .hero-slider li:nth-of-type(4)
+    {
+        background-image: none;
+    }
+
+
+    .widget .hero .hero-slider .full-width,
+    .widget .hero .hero-slider .half-width
+    {
+        padding-top: 150px;
+    }
+
+
+    .widget .hero .hero-slider .bg-video-wrapper
+    {
+        display: block;
+    }
+
+
+    .widget .hero .hero-slider .half-width
+    {
+        width: 45%;
+    }
+
+
+    .widget .hero .hero-slider .half-width:first-of-type
+    {
+        left: 5%;
+    }
+
+
+    .widget .hero .hero-slider .half-width:nth-of-type(2)
+    {
+        right: 5%;
+        left: auto;
+    }
+
+    .widget .hero .hero-slider .img-container
+    {
+        display: block;
+    }
+
+    .widget .hero .hero-slider h2
+    {
+        font-size: 33px;
+        font-size: 2.0625rem;
+        line-height: 1.2727272727;
+
+        margin-bottom: .8484848485em;
+    }
+
+    .widget .hero .hero-slider .btn
+    {
+        font-size: 1.4rem;
+    }
+
+    .widget .hero .hero-slider .half-width
+    {
+        -webkit-transform: translateX(40px);
+           -moz-transform: translateX(40px);
+            -ms-transform: translateX(40px);
+             -o-transform: translateX(40px);
+                transform: translateX(40px);
+
+        opacity: 0;
+    }
+
+    .widget .hero .hero-slider .move-left .half-width
+    {
+        -webkit-transform: translateX(-40px);
+           -moz-transform: translateX(-40px);
+            -ms-transform: translateX(-40px);
+             -o-transform: translateX(-40px);
+                transform: translateX(-40px);
+    }
+
+    .widget .hero .hero-slider .selected .half-width
+    {
+        -webkit-transform: translateX(0);
+           -moz-transform: translateX(0);
+            -ms-transform: translateX(0);
+             -o-transform: translateX(0);
+                transform: translateX(0);
+        /* this is the visible slide */
+
+        opacity: 1;
+    }
+
+    .widget .hero .hero-slider .is-moving .half-width
+    {
+        /* this is the slide moving outside the viewport
+    wait for the end of the transition on the <li> parent before set opacity to 0 and translate to 40px/-40px */
+        -webkit-transition: opacity 0s .5s, -webkit-transform 0s .5s;
+           -moz-transition: opacity 0s .5s, -moz-transform 0s .5s;
+                transition: opacity 0s .5s, transform 0s .5s;
+    }
+
+    .widget .hero .hero-slider li.selected.from-left .half-width:nth-of-type(2),
+    .widget .hero .hero-slider li.selected.from-right .half-width:first-of-type
+    {
+        /* this is the selected slide - different animation if it's entering from left or right */
+        -webkit-transition: opacity .4s .2s, -webkit-transform .5s .2s;
+           -moz-transition: opacity .4s .2s, -moz-transform .5s .2s;
+                transition: opacity .4s .2s, transform .5s .2s;
+    }
+
+    .widget .hero .hero-slider li.selected.from-left .half-width:first-of-type,
+    .widget .hero .hero-slider li.selected.from-right .half-width:nth-of-type(2)
+    {
+        /* this is the selected slide - different animation if it's entering from left or right */
+        -webkit-transition: opacity .4s .4s, -webkit-transform .5s .4s;
+           -moz-transition: opacity .4s .4s, -moz-transform .5s .4s;
+                transition: opacity .4s .4s, transform .5s .4s;
+    }
+
+    .widget .hero .hero-slider .full-width h2,
+    .widget .hero .hero-slider .full-width p,
+    .widget .hero .hero-slider .full-width .btn
+    {
+        -webkit-transform: translateX(100px);
+           -moz-transform: translateX(100px);
+            -ms-transform: translateX(100px);
+             -o-transform: translateX(100px);
+                transform: translateX(100px);
+
+        opacity: 0;
+    }
+
+    .widget .hero .hero-slider .move-left .full-width h2,
+    .widget .hero .hero-slider .move-left .full-width p,
+    .widget .hero .hero-slider .move-left .full-width .btn
+    {
+        -webkit-transform: translateX(-100px);
+           -moz-transform: translateX(-100px);
+            -ms-transform: translateX(-100px);
+             -o-transform: translateX(-100px);
+                transform: translateX(-100px);
+
+        opacity: 0;
+    }
+
+    .widget .hero .hero-slider .selected .full-width h2,
+    .widget .hero .hero-slider .selected .full-width p,
+    .widget .hero .hero-slider .selected .full-width .btn
+    {
+        -webkit-transform: translateX(0);
+           -moz-transform: translateX(0);
+            -ms-transform: translateX(0);
+             -o-transform: translateX(0);
+                transform: translateX(0);
+        /* this is the visible slide */
+
+        opacity: 1;
+    }
+
+    .widget .hero .hero-slider li.is-moving .full-width h2,
+    .widget .hero .hero-slider li.is-moving .full-width p,
+    .widget .hero .hero-slider li.is-moving .full-width .btn
+    {
+        /* this is the slide moving outside the viewport
+    wait for the end of the transition on the li parent before set opacity to 0 and translate to 100px/-100px */
+        -webkit-transition: opacity 0s .5s, -webkit-transform 0s .5s;
+           -moz-transition: opacity 0s .5s, -moz-transform 0s .5s;
+                transition: opacity 0s .5s, transform 0s .5s;
+    }
+
+    .widget .hero .hero-slider li.selected h2
+    {
+        -webkit-transition: opacity .4s .2s, -webkit-transform .5s .2s;
+           -moz-transition: opacity .4s .2s, -moz-transform .5s .2s;
+                transition: opacity .4s .2s, transform .5s .2s;
+    }
+
+    .widget .hero .hero-slider li.selected p
+    {
+        -webkit-transition: opacity .4s .3s, -webkit-transform .5s .3s;
+           -moz-transition: opacity .4s .3s, -moz-transform .5s .3s;
+                transition: opacity .4s .3s, transform .5s .3s;
+    }
+
+    .widget .hero .hero-slider li.selected .btn
+    {
+        -webkit-transition: opacity .4s .4s, -webkit-transform .5s .4s, background-color .2s 0s;
+           -moz-transition: opacity .4s .4s, -moz-transform .5s .4s, background-color .2s 0s;
+                transition: opacity .4s .4s, transform .5s .4s, background-color .2s 0s;
+    }
+
+    .slider-nav a
     {
         font-size: 1.1rem;
 
         text-transform: uppercase;
+    }
+}
+
+/**
+ * 14.3 - >= 910px
+ */
+
+@media screen and (min-width: 56.875em)
+{
+    .widget .hero .hero-slider
+    {
+        height: 680px;
+    }
+
+    .widget .hero .hero-slider .full-width,
+    .widget .hero .hero-slider .half-width
+    {
+        padding-top: 220px;
+    }
+
+    .widget .hero .hero-slider h2,
+    .widget .hero .hero-slider p
+    {
+        margin-bottom: 20px;
+    }
+
+    .widget .hero .hero-slider h2
+    {
+        font-size: 40px;
+        font-size: 2.5rem;
+        line-height: 1.225;
+
+        margin-bottom: 1.05em;
+    }
+
+    .widget .hero .hero-slider p
+    {
+        font-size: 1.6rem;
     }
 }

@@ -114,46 +114,46 @@ class Slides_WP_Widget extends WP_Widget {
 				endwhile;
 
 				?>
-				<div class="cd-hero">
-					<ul class="cd-hero-slider autoplay">
+				<div class="hero">
+					<ul class="hero-slider slider autoplay">
 						<?php for($i = 0; $i < $total_slides; $i++) : ?>
 
 							<?php $slides[$i]['content'] = apply_filters('the_content', $slides[$i]['content']); ?>
 
-							<li<?php if ( $i == 0 ) : ?> class="selected"<? endif; ?> style="background-image: url('<?php echo $slides[$i]['featured_image']; ?>');">
+							<li class="slide slide-<?php echo $i; ?><?php if ( $i == 0 ) : ?> selected<? endif; ?>" style="background-image: url('<?php echo $slides[$i]['featured_image']; ?>');">
 								<?php if ( $slides[$i]['width'] === 'full-width'): ?>
-									<div class="cd-full-width">
-										<h2 class="cd-title"><a href="<?php echo $slides[$i]['link']; ?>" target="_blank" ><?php echo $slides[$i]['title']; ?></a></h2>
+									<div class="full-width">
+										<h2 class="title"><a href="<?php echo $slides[$i]['link']; ?>" target="_blank" ><?php echo $slides[$i]['title']; ?></a></h2>
 										<?php $slides[$i]['content'] = apply_filters('the_content', $slides[$i]['content']); ?>
 										<?php echo $slides[$i]['content']; ?>
-										<a href="<?php echo $slides[$i]['link']; ?>" class="cd-btn"><?php _e('Read More', 'furiagamingcommunity_slideshows'); ?></a>
-									</div><!-- .cd-cd-full-width -->
+										<a href="<?php echo $slides[$i]['link']; ?>" class="btn"><?php _e('Read More', 'furiagamingcommunity_slideshows'); ?></a>
+									</div><!-- .full-width -->
 								<?php else: ?>
-									<div class="cd-cd-half-width<?php if ( !empty( $image ) ) echo ' cd-img-container'; ?>">
+									<div class="half-width<?php if ( !empty( $image ) ) echo ' img-container'; ?>">
 										<?php if ( $slides[$i]['position'] === 'left' ) : ?>
-											<h2 class="cd-title"><a href="<?php echo $slides[$i]['link']; ?>" target="_blank" ><?php echo $slides[$i]['title']; ?></a></h2>
+											<h2 class="title"><a href="<?php echo $slides[$i]['link']; ?>" target="_blank" ><?php echo $slides[$i]['title']; ?></a></h2>
 											<?php echo $slides[$i]['content']; ?>
-											<a href="<?php echo $slides[$i]['link']; ?>" class="cd-btn"><?php _e('Read More', 'furiagamingcommunity_slideshows'); ?></a>
+											<a href="<?php echo $slides[$i]['link']; ?>" class="btn"><?php _e('Read More', 'furiagamingcommunity_slideshows'); ?></a>
 										<?php elseif ( !empty( $image ) ): ?>
 											<img src="<?php echo $image; ?>" alt="<?php echo $slides[$i]['title']; ?>"/>
 										<?php endif; ?>
-									</div><!-- .cd-half-width -->
-									<div class="cd-cd-half-width<?php if ( !empty( $image ) ) echo ' cd-img-container'; ?>">
+									</div><!-- .half-width -->
+									<div class="half-width<?php if ( !empty( $image ) ) echo ' img-container'; ?>">
 										<?php if ( $slides[$i]['position'] === 'right' ) : ?>
-											<h2 class="cd-title"><a href="<?php echo $slides[$i]['link']; ?>" target="_blank" ><?php echo $slides[$i]['title']; ?></a></h2>
+											<h2 class="title"><a href="<?php echo $slides[$i]['link']; ?>" target="_blank" ><?php echo $slides[$i]['title']; ?></a></h2>
 											<?php echo $slides[$i]['content']; ?>
-											<a href="<?php echo $slides[$i]['link']; ?>" class="cd-btn"><?php _e('Read More', 'furiagamingcommunity_slideshows'); ?></a>
+											<a href="<?php echo $slides[$i]['link']; ?>" class="btn"><?php _e('Read More', 'furiagamingcommunity_slideshows'); ?></a>
 										<?php elseif ( !empty( $image ) ): ?>
 											<img src="<?php echo $image; ?>" alt="<?php echo $slides[$i]['title']; ?>"/>
 										<?php endif; ?>
-									</div><!-- .cd-half-width -->
+									</div><!-- .half-width -->
 								<?php endif; ?>
-							</li><!-- .cd-slide-<?php echo $i+1; ?> -->
+							</li><!-- .slide-<?php echo $i+1; ?> -->
 
 						<?php endfor; ?>
-					</ul> <!-- .cd-hero-slider -->
+					</ul> <!-- .hero-slider -->
 
-					<div class="cd-slider-nav">
+					<div class="slider-nav">
 						<nav>
 							<ul>
 								<?php for ( $i = 0; $i < $total_slides; $i++ ) : ?>
@@ -161,8 +161,8 @@ class Slides_WP_Widget extends WP_Widget {
 								<?php endfor; ?>
 							</ul>
 						</nav>
-					</div> <!-- .cd-slider-nav -->
-				</div> <!-- .cd-hero -->
+					</div> <!-- .slider-nav -->
+				</div> <!-- .hero -->
 				<?php
 
 			else:
