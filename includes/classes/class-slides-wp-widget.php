@@ -115,7 +115,7 @@ class Slides_WP_Widget extends WP_Widget {
 
 				?>
 				<div class="hero">
-					<ul class="hero-slider slider autoplay">
+					<ul class="hero-slider slider">
 						<?php for($i = 0; $i < $total_slides; $i++) : ?>
 
 							<?php $slides[$i]['content'] = apply_filters('the_content', $slides[$i]['content']); ?>
