@@ -1,9 +1,6 @@
 .widget .hero
 {
     position: relative;
-
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
 .widget .hero .hero-slider
@@ -109,20 +106,13 @@ Single slide style
 {
     position: absolute;
     z-index: 1;
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 100%;
-    /* this padding is used to align the text */
-    padding-top: 100px;
+    bottom: 9.0910%;
 
     -webkit-transform: translateZ(0);
        -moz-transform: translateZ(0);
         -ms-transform: translateZ(0);
          -o-transform: translateZ(0);
             transform: translateZ(0);
-    text-align: center;
     /* Force Hardware Acceleration in WebKit */
 
     -webkit-backface-visibility: hidden;
@@ -189,40 +179,41 @@ Single slide style
 }
 
 .widget .hero .hero-slider h2,
-.widget .hero .hero-slider p
+.widget .hero .hero-slider p,
+.widget .hero .hero-slider .btn
 {
-    line-height: 1.2;
+    display: inline-block;
+    float: left;
+    clear: both;
 
-    max-width: 1320px;
-    margin: 0 auto 14px;
-    padding: 0 4.5455%;
-
-    color: #fff;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, .1);
+    max-width: 60%;
 }
 
 .widget .hero .hero-slider h2
 {
-    font-family: 'Merriweather', serif;
-    font-size: 24px;
-    font-size: 1.5rem;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 6.5rem;
     font-weight: 700;
-    line-height: 1.25;
+    line-height: 8.8rem;
 
-    clear: both;
+    margin-bottom: 0;
 
-    margin-bottom: .5em;
-
+    white-space: normal;
     letter-spacing: .025em;
-
-    text-shadow: 1px 1px #222, 2px 2px #222, 3px 3px #222;
-
-    text-rendering: optimizeLegibility;
+    text-transform: uppercase;
 }
 
 .widget .hero .hero-slider h2 a
 {
-    color: white;
+    padding: 0 2px;
+
+    color: #fff;
+    background: rgba(34, 34, 34, .7);
+    box-shadow: 6px 0 0 rgba(34, 34, 34, .7), -6px 0 0 rgba(34, 34, 34, .7);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, .1);
+    text-shadow: 1px 1px #222, 2px 2px #222, 3px 3px #222;
+
+    text-rendering: optimizeLegibility;
 }
 
 .widget .hero .hero-slider p
@@ -230,7 +221,11 @@ Single slide style
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
     font-size: 1rem;
-    line-height: 1.75;
+    line-height: 1.25;
+
+    margin: 1em 0 1.5em;
+
+    text-shadow: 1px 1px #222;
 }
 
 .widget .hero .hero-slider .btn
@@ -238,9 +233,7 @@ Single slide style
     font-weight: 700;
     line-height: 1;
 
-    display: inline-block;
-
-    padding: .84375em .875em .78125em;
+    padding: .3846153846em .5384615385em;
 
     letter-spacing: .046875em;
     text-transform: uppercase;
@@ -410,7 +403,7 @@ Slider navigation
     padding: .3846153846em .5384615385em;
 
     transition: background 400ms ease-in-out, border 400ms ease-in-out;
-    letter-spacing: .5px;
+    letter-spacing: .046875em;
 
     color: #fa0;
     border: 1px solid #fa0;
@@ -464,6 +457,26 @@ Slider navigation
     opacity: 1;
 }
 
+.slide-inner
+{
+    position: relative;
+
+    max-width: 1320px;
+    min-height: 100%;
+    margin: 0 auto;
+}
+
+.slide-content
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    overflow: hidden;
+}
+
 /**
  * 14.1 - >= 710px
  */
@@ -480,43 +493,30 @@ Slider navigation
         background-image: none;
     }
 
-
     .widget .hero .hero-slider li:nth-of-type(3)
     {
         background-image: none;
     }
-
 
     .widget .hero .hero-slider li:nth-of-type(4)
     {
         background-image: none;
     }
 
-
-    .widget .hero .hero-slider .full-width,
-    .widget .hero .hero-slider .half-width
-    {
-        padding-top: 150px;
-    }
-
-
     .widget .hero .hero-slider .bg-video-wrapper
     {
         display: block;
     }
-
 
     .widget .hero .hero-slider .half-width
     {
         width: 45%;
     }
 
-
     .widget .hero .hero-slider .half-width:first-of-type
     {
         left: 5%;
     }
-
 
     .widget .hero .hero-slider .half-width:nth-of-type(2)
     {
@@ -534,13 +534,11 @@ Slider navigation
         font-size: 33px;
         font-size: 2.0625rem;
         line-height: 1.2727272727;
-
-        margin-bottom: .8484848485em;
     }
 
     .widget .hero .hero-slider .btn
     {
-        font-size: 1.4rem;
+        font-size: 1.25rem;
     }
 
     .widget .hero .hero-slider .half-width
@@ -693,16 +691,9 @@ Slider navigation
         height: 680px;
     }
 
-    .widget .hero .hero-slider .full-width,
-    .widget .hero .hero-slider .half-width
+    .widget .hero .hero-slider .slide-content
     {
-        padding-top: 220px;
-    }
-
-    .widget .hero .hero-slider h2,
-    .widget .hero .hero-slider p
-    {
-        margin-bottom: 20px;
+        padding: 0 4.5455%;
     }
 
     .widget .hero .hero-slider h2
@@ -710,7 +701,5 @@ Slider navigation
         font-size: 40px;
         font-size: 2.5rem;
         line-height: 1.225;
-
-        margin-bottom: 1.05em;
     }
 }

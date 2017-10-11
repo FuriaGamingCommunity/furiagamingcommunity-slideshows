@@ -121,33 +121,37 @@ class Slides_WP_Widget extends WP_Widget {
 							<?php $slides[$i]['content'] = apply_filters('the_content', $slides[$i]['content']); ?>
 
 							<li class="slide slide-<?php echo $i; ?><?php if ( $i == 0 ) : ?> selected<? endif; ?>" style="background-image: url('<?php echo $slides[$i]['featured_image']; ?>');">
-								<?php if ( $slides[$i]['width'] === 'full-width'): ?>
-									<div class="full-width">
-										<h2 class="title"><a href="<?php echo $slides[$i]['link']; ?>" target="_blank" ><?php echo $slides[$i]['title']; ?></a></h2>
-										<?php $slides[$i]['content'] = apply_filters('the_content', $slides[$i]['content']); ?>
-										<?php echo $slides[$i]['content']; ?>
-										<a href="<?php echo $slides[$i]['link']; ?>" class="btn"><?php _e('Read More', 'furiagamingcommunity_slideshows'); ?></a>
-									</div><!-- .full-width -->
-								<?php else: ?>
-									<div class="half-width<?php if ( !empty( $image ) ) echo ' img-container'; ?>">
-										<?php if ( $slides[$i]['position'] === 'left' ) : ?>
-											<h2 class="title"><a href="<?php echo $slides[$i]['link']; ?>" target="_blank" ><?php echo $slides[$i]['title']; ?></a></h2>
+								<div class="slide-inner">
+									<div class="slide-content">
+										<?php if ( $slides[$i]['width'] === 'full-width'): ?>
+										<div class="full-width">
+											<h2 class="title"><a href="<?php echo $slides[$i]['link']; ?>" target="_blank" class="title-link"><?php echo $slides[$i]['title']; ?></a></h2>
+											<?php $slides[$i]['content'] = apply_filters('the_content', $slides[$i]['content']); ?>
 											<?php echo $slides[$i]['content']; ?>
 											<a href="<?php echo $slides[$i]['link']; ?>" class="btn"><?php _e('Read More', 'furiagamingcommunity_slideshows'); ?></a>
-										<?php elseif ( !empty( $image ) ): ?>
-											<img src="<?php echo $image; ?>" alt="<?php echo $slides[$i]['title']; ?>"/>
-										<?php endif; ?>
-									</div><!-- .half-width -->
-									<div class="half-width<?php if ( !empty( $image ) ) echo ' img-container'; ?>">
-										<?php if ( $slides[$i]['position'] === 'right' ) : ?>
-											<h2 class="title"><a href="<?php echo $slides[$i]['link']; ?>" target="_blank" ><?php echo $slides[$i]['title']; ?></a></h2>
+										</div><!-- .full-width -->
+										<?php else: ?>
+										<div class="half-width<?php if ( !empty( $image ) ) echo ' img-container'; ?>">
+											<?php if ( $slides[$i]['position'] === 'left' ) : ?>
+											<h2 class="title"><a href="<?php echo $slides[$i]['link']; ?>" target="_blank" class="title-link"><?php echo $slides[$i]['title']; ?></a></h2>
 											<?php echo $slides[$i]['content']; ?>
 											<a href="<?php echo $slides[$i]['link']; ?>" class="btn"><?php _e('Read More', 'furiagamingcommunity_slideshows'); ?></a>
-										<?php elseif ( !empty( $image ) ): ?>
+											<?php elseif ( !empty( $image ) ): ?>
 											<img src="<?php echo $image; ?>" alt="<?php echo $slides[$i]['title']; ?>"/>
+											<?php endif; ?>
+										</div><!-- .half-width -->
+										<div class="half-width<?php if ( !empty( $image ) ) echo ' img-container'; ?>">
+											<?php if ( $slides[$i]['position'] === 'right' ) : ?>
+											<h2 class="title"><a href="<?php echo $slides[$i]['link']; ?>" target="_blank" class="title-link"><?php echo $slides[$i]['title']; ?></a></h2>
+											<?php echo $slides[$i]['content']; ?>
+											<a href="<?php echo $slides[$i]['link']; ?>" class="btn"><?php _e('Read More', 'furiagamingcommunity_slideshows'); ?></a>
+											<?php elseif ( !empty( $image ) ): ?>
+											<img src="<?php echo $image; ?>" alt="<?php echo $slides[$i]['title']; ?>"/>
+											<?php endif; ?>
+										</div><!-- .half-width -->
 										<?php endif; ?>
-									</div><!-- .half-width -->
-								<?php endif; ?>
+									</div><!-- .slide-content -->
+								</div><!-- .slide-inner -->
 							</li><!-- .slide-<?php echo $i+1; ?> -->
 
 						<?php endfor; ?>
