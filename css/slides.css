@@ -267,7 +267,7 @@ Single slide style
 /* --------------------------------
 Slider navigation
 -------------------------------- */
-.slider-nav
+.widget .hero .slider-nav
 {
     line-height: 0;
 
@@ -281,24 +281,22 @@ Slider navigation
     text-align: left;
 }
 
-.slider-nav nav,
-.slider-nav ul,
-.slider-nav li,
-.slider-nav a
+.widget .hero .slider-nav nav,
+.widget .hero .slider-nav ul,
+.widget .hero .slider-nav li,
+.widget .hero .slider-nav a
 {
     height: 100%;
 }
 
-.slider-nav nav
+.widget .hero .slider-nav nav
 {
     position: relative;
 
     display: inline-block;
-
-    padding: 0 4.5455%;
 }
 
-.slider-nav .marker
+.widget .hero .slider-nav .marker
 {
     position: absolute;
     bottom: 0;
@@ -316,7 +314,7 @@ Slider navigation
     box-shadow: inset 0 2px 0 currentColor;
 }
 
-.slider-nav .marker.item-2
+.widget .hero .slider-nav .marker.item-2
 {
     -webkit-transform: translateX(100%);
        -moz-transform: translateX(100%);
@@ -325,7 +323,7 @@ Slider navigation
             transform: translateX(100%);
 }
 
-.slider-nav .marker.item-3
+.widget .hero .slider-nav .marker.item-3
 {
     -webkit-transform: translateX(200%);
        -moz-transform: translateX(200%);
@@ -334,7 +332,7 @@ Slider navigation
             transform: translateX(200%);
 }
 
-.slider-nav .marker.item-4
+.widget .hero .slider-nav .marker.item-4
 {
     -webkit-transform: translateX(300%);
        -moz-transform: translateX(300%);
@@ -343,7 +341,7 @@ Slider navigation
             transform: translateX(300%);
 }
 
-.slider-nav .marker.item-5
+.widget .hero .slider-nav .marker.item-5
 {
     -webkit-transform: translateX(400%);
        -moz-transform: translateX(400%);
@@ -352,13 +350,13 @@ Slider navigation
             transform: translateX(400%);
 }
 
-.slider-nav ul,
-.widget .slider-nav ul
+.widget .hero .slider-nav ul,
+.widget .hero .slider-nav ul
 {
     margin: 0;
 }
 
-.slider-nav ul::after
+.widget .hero .slider-nav ul::after
 {
     display: table;
     clear: both;
@@ -366,30 +364,30 @@ Slider navigation
     content: '';
 }
 
-.slider-nav li
+.widget .hero .slider-nav li
 {
     display: inline-block;
     float: left;
 }
 
-.slider-nav li.selected a
+.widget .hero .slider-nav li.selected a
 {
     color: #333;
     border: 1px solid #fa0;
     background-color: #fa0;
 }
 
-.slider-nav li.selected a:hover
+.widget .hero .slider-nav li.selected a:hover
 {
     background-color: #fb0;
 }
 
-.no-touch .slider-nav li.selected a:hover
+.no-touch .widget .hero .slider-nav li.selected a:hover
 {
     background-color: transparent;
 }
 
-.slider-nav a
+.widget .hero .slider-nav a
 {
     font-family: 'Open Sans', sans-serif;
     font-size: 1rem;
@@ -410,29 +408,29 @@ Slider navigation
     background-color: rgba(0, 0, 0, 0);
 }
 
-.slider-nav a + a
+.widget .hero .slider-nav a + a
 {
     margin-left: .5384615385em;
 }
 
-.slider-nav li:first-child a
+.widget .hero .slider-nav li:first-child a
 {
     border-top-left-radius: 2px;
     border-bottom-left-radius: 2px;
 }
 
-.slider-nav li:last-child a
+.widget .hero .slider-nav li:last-child a
 {
     border-top-right-radius: 2px;
     border-bottom-right-radius: 2px;
 }
 
-.slider-nav a:hover
+.widget .hero .slider-nav a:hover
 {
     border-color: #fb0;
 }
 
-.slider-nav a:before
+.widget .hero .slider-nav a:before
 {
     position: absolute;
     z-index: -100;
@@ -452,7 +450,7 @@ Slider navigation
     background-image: linear-gradient(rgba(255, 187, 0, .5), rgba(255, 187, 0, 0));
 }
 
-.slider-nav a:hover:before
+.widget .hero .slider-nav a:hover:before
 {
     opacity: 1;
 }
@@ -486,6 +484,11 @@ Slider navigation
     .widget .hero .hero-slider
     {
         height: 500px;
+    }
+
+    .widget .hero .hero-slider .slide-content
+    {
+        padding: 0 7.6923%;
     }
 
     .widget .hero .hero-slider li:nth-of-type(2)
@@ -672,7 +675,12 @@ Slider navigation
                 transition: opacity .4s .4s, transform .5s .4s, background-color .2s 0s;
     }
 
-    .slider-nav a
+    .widget .hero .slider-nav nav
+    {
+        padding: 0 7.6923%;
+    }
+
+    .widget .hero .slider-nav a
     {
         font-size: 1.1rem;
 
@@ -701,5 +709,10 @@ Slider navigation
         font-size: 40px;
         font-size: 2.5rem;
         line-height: 1.225;
+    }
+
+    .widget .hero .slider-nav nav
+    {
+        padding: 0 4.5455%;
     }
 }
