@@ -158,13 +158,13 @@ class Slides_WP_Widget extends WP_Widget {
 					</ul> <!-- .hero-slider -->
 
 					<div class="slider-nav">
-						<nav>
-							<ul>
+						<nav class="slider-nav-inner">
+							<ul class="slider-nav-content">
 								<?php for ( $i = 0; $i < $total_slides; $i++ ) : ?>
 									<li<?php if ( $i == 0 ) : ?> class="selected"<? endif; ?>><a href="#<?php echo $i; ?>"><?php echo $slides[$i]['tab']; ?></a></li>
 								<?php endfor; ?>
-							</ul>
-						</nav>
+							</ul><!-- .slide-nav-content -->
+						</nav><!-- .slide-nav-inner -->
 					</div> <!-- .slider-nav -->
 				</div> <!-- .hero -->
 				<?php

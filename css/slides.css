@@ -72,11 +72,6 @@ Single slide style
     background-size: cover;
 }
 
-.widget .hero .hero-slider li:first-of-type
-{
-    background-color: #333;
-}
-
 .widget .hero .hero-slider li:nth-of-type(2)
 {
     background-color: #303030;
@@ -106,7 +101,7 @@ Single slide style
 {
     position: absolute;
     z-index: 1;
-    bottom: 9.0910%;
+    bottom: 3.75rem;
 
     -webkit-transform: translateZ(0);
        -moz-transform: translateZ(0);
@@ -178,29 +173,18 @@ Single slide style
             transform: translateX(-50%) translateY(-50%);
 }
 
-.widget .hero .hero-slider h2,
-.widget .hero .hero-slider p,
-.widget .hero .hero-slider .btn
-{
-    display: inline-block;
-    float: left;
-    clear: both;
-
-    max-width: 60%;
-}
-
 .widget .hero .hero-slider h2
 {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 6.5rem;
-    font-weight: 700;
-    line-height: 8.8rem;
-
     margin-bottom: 0;
 
     white-space: normal;
     letter-spacing: .025em;
     text-transform: uppercase;
+
+    font-family: 'Open Sans', sans-serif;
+    font-size: 24px;
+    font-size: 1.5rem;
+    line-height: 1.2727272727;
 }
 
 .widget .hero .hero-slider h2 a
@@ -218,21 +202,19 @@ Single slide style
 
 .widget .hero .hero-slider p
 {
+    margin-top: 1em;
+    margin-bottom: 1.5em;
+
+    text-shadow: 1px 1px #222;
+
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
     font-size: 1rem;
     line-height: 1.25;
-
-    margin: 1em 0 1.5em;
-
-    text-shadow: 1px 1px #222;
 }
 
 .widget .hero .hero-slider .btn
 {
-    font-weight: 700;
-    line-height: 1;
-
     padding: .3846153846em .5384615385em;
 
     letter-spacing: .046875em;
@@ -242,6 +224,9 @@ Single slide style
     border: 1px solid #fa0;
     border-radius: 2px;
     background-color: #fa0;
+
+    font-weight: 700;
+    line-height: 1;
 }
 
 .widget .hero .hero-slider .btn.secondary
@@ -264,21 +249,28 @@ Single slide style
     background-color: #161a1e;
 }
 
+
+.widget .hero .hero-slider h2,
+.widget .hero .hero-slider p,
+.widget .hero .hero-slider .btn
+{
+    margin-right: 7.6923%;
+    margin-left: 7.6923%;
+}
+
 /* --------------------------------
 Slider navigation
 -------------------------------- */
 .widget .hero .slider-nav
 {
-    line-height: 0;
+  position: absolute;
+  bottom: 0;
 
-    position: relative;
-    z-index: 2;
+  width: 100%;
 
-    max-width: 1320px;
-    margin: 0 auto;
-    margin-bottom: 1.6153846154em;
+  text-align: left;
 
-    text-align: left;
+  line-height: 0;
 }
 
 .widget .hero .slider-nav nav,
@@ -291,9 +283,14 @@ Slider navigation
 
 .widget .hero .slider-nav nav
 {
-    position: relative;
+  position: relative;
 
-    display: inline-block;
+  display: block;
+
+  max-width: 1320px;
+  min-height: 100%;
+  margin-right: 7.6923%;
+  margin-left: 7.6923%;
 }
 
 .widget .hero .slider-nav .marker
@@ -389,11 +386,6 @@ Slider navigation
 
 .widget .hero .slider-nav a
 {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1;
-
     position: relative;
 
     display: block;
@@ -402,10 +394,16 @@ Slider navigation
 
     transition: background 400ms ease-in-out, border 400ms ease-in-out;
     letter-spacing: .046875em;
+    text-transform: uppercase;
 
     color: #fa0;
     border: 1px solid #fa0;
     background-color: rgba(0, 0, 0, 0);
+
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1;
 }
 
 .widget .hero .slider-nav a + a
@@ -511,6 +509,12 @@ Slider navigation
         display: block;
     }
 
+    .widget .hero .hero-slider .full-width,
+    .widget .hero .hero-slider .half-width
+    {
+        bottom: 4.375rem;
+    }
+
     .widget .hero .hero-slider .half-width
     {
         width: 45%;
@@ -542,6 +546,19 @@ Slider navigation
     .widget .hero .hero-slider .btn
     {
         font-size: 1.25rem;
+    }
+
+    .widget .hero .hero-slider h2,
+    .widget .hero .hero-slider p,
+    .widget .hero .hero-slider .btn
+    {
+      display: inline-block;
+      float: left;
+      clear: both;
+
+      max-width: 70%;
+      margin-right: 0;
+      margin-left: 0;
     }
 
     .widget .hero .hero-slider .half-width
@@ -677,14 +694,18 @@ Slider navigation
 
     .widget .hero .slider-nav nav
     {
-        padding: 0 7.6923%;
+      margin-right: 0;
+      margin-left: 0;
     }
 
     .widget .hero .slider-nav a
     {
-        font-size: 1.1rem;
+      font-size: 1.1rem;
+    }
 
-        text-transform: uppercase;
+    .widget .hero .slider-nav .slider-nav-content
+    {
+        padding: 0 7.6923%;
     }
 }
 
@@ -704,6 +725,17 @@ Slider navigation
         padding: 0 4.5455%;
     }
 
+    .widget .hero .hero-slider .full-width,
+    .widget .hero .hero-slider .half-width
+    {
+        bottom: 5rem;
+    }
+
+    .widget .hero .slider-nav .slider-nav-content
+    {
+      padding: 0 4.5455%;
+    }
+
     .widget .hero .hero-slider h2
     {
         font-size: 40px;
@@ -711,8 +743,10 @@ Slider navigation
         line-height: 1.225;
     }
 
-    .widget .hero .slider-nav nav
+    .widget .hero .hero-slider h2,
+    .widget .hero .hero-slider p,
+    .widget .hero .hero-slider .btn
     {
-        padding: 0 4.5455%;
+      max-width: 60%;
     }
 }
