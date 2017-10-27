@@ -694,8 +694,8 @@ Slider navigation
 
     .widget .hero .slider-nav nav
     {
-      margin-right: 0;
-      margin-left: 0;
+      margin-right: auto;
+      margin-left: auto;
     }
 
     .widget .hero .slider-nav a
